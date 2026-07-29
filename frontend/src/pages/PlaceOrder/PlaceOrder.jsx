@@ -3,6 +3,8 @@ import "./PlaceOrder.css";
 import { StoreContext } from "../../context/StoreContext";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 
 const PlaceOrder = () => {
@@ -52,6 +54,19 @@ const PlaceOrder = () => {
         alert("Error");
     }
   }
+
+
+  const navigate= useNavigate();
+
+  useEffect(()=>{
+      if(!token){
+          navigate('/cart');
+      }
+      else if(getTotalCartAmount()===0)
+      {
+         navigate('/cart')
+      }
+  },[token])
 
   
 
